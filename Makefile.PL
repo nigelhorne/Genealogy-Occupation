@@ -23,9 +23,16 @@ WriteMakefile(
 		'ExtUtils::MakeMaker' => 6.64,	# Minimum version for TEST_REQUIRES
 	}, PREREQ_PM => {
 		'strict' => 0,
-		'warnings' => 0
+		'warnings' => 0,
+		'Carp' => 0,
+		'I18N::LangTags::Detect' => 0,
+		'Lingua::EN::ABC' => 0,
+		'Params::Get' => 0,
+		'Params::Validate::Strict' => 0,
+		'Return::Set' => 0,
 	}, TEST_REQUIRES => {
 		'Test::Most' => 0,
+		'Test::Mockingbird' => 0,
 	}, dist => $dist,
 	clean => { FILES => 'Genealogy-Occupation-*' },	# Clean up distribution files
 	META_MERGE => {	# https://perldoc.perl.org/CPAN::Meta::Spec

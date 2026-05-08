@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use 5.014;
 
-use Carp qw(croak carp);
+use Carp qw(croak);
 use I18N::LangTags::Detect;
 use Lingua::EN::ABC;
 use Params::Get;
@@ -23,14 +23,11 @@ my $NEW_SCHEMA = {
 };
 
 # Schema for normalise() arguments.
-# Note: occupation can be a string or arrayref - union type support
-# is pending in Params::Validate::Strict, so we validate as string
-# here and handle the arrayref case explicitly in normalise()
+# Note: occupation is extracted and normalised to an arrayref BEFORE
+# validate_strict is called, because Params::Validate::Strict does not
+# yet support union types.  Only the remaining named arguments (sex)
+# are validated here.
 my $NORMALISE_SCHEMA = {
-	occupation => {
-		type     => 'string',
-		optional => 0,
-	},
 	sex => {
 		type     => 'string',
 		optional => 1,
@@ -131,7 +128,7 @@ Version 0.01
     # Returns ('Agricultural Labourer')
 
     # Or pass an arrayref
-    my @occupations = $normaliser->normalise(
+    my @more = $normaliser->normalise(
         occupation => ['Ag Lab', 'Ag Lab', 'Retired'],
         sex        => 'M',
     );
@@ -153,9 +150,9 @@ Processing steps applied in order:
 
 =item 1. Filter out non-occupations (Scholar, Retired, Domestic Duties etc)
 
-=item 2. Deduplicate consecutive identical or equivalent entries
+=item 2. Normalise abbreviations and malformed entries to canonical forms
 
-=item 3. Normalise abbreviations and malformed entries to canonical forms
+=item 3. Deduplicate consecutive identical or equivalent entries
 
 =item 4. Apply locale-specific spellings via C<Lingua::EN::ABC>
 
@@ -322,17 +319,21 @@ sub normalise {
 	# Accept both hashref and flat list
 	my $args = Params::Get::get_params(undef, @_);
 
-	# Validate input arguments strictly
+	# Extract and normalise occupation to an arrayref BEFORE calling
+	# validate_strict.  Params::Validate::Strict does not yet support
+	# union types, so passing an arrayref against a 'string' schema
+	# would die.  We handle the type check here explicitly instead.
+	my $raw = delete $args->{occupation};
+	croak 'Genealogy::Occupation::normalise: occupation is required'
+		unless defined $raw;
+	my $occupations = ref($raw) eq 'ARRAY' ? $raw : [ $raw ];
+
+	# Validate remaining named arguments (sex) strictly
 	validate_strict({
 		description => 'Genealogy::Occupation::normalise',
 		input       => $args,
 		schema      => $NORMALISE_SCHEMA,
 	});
-
-	# Normalise input to an arrayref for uniform processing
-	my $occupations = ref($args->{occupation}) eq 'ARRAY'
-		? $args->{occupation}
-		: [ $args->{occupation} ];
 
 	# Default sex to M if not provided, needed for gendered translations
 	my $sex = $args->{sex} // 'M';
@@ -340,7 +341,7 @@ sub normalise {
 	my $language = $self->{language} // 'en';
 	my @result;
 
-	foreach my $occupation(@{$occupations}) {
+	foreach my $occupation (@{$occupations}) {
 		# Clean up whitespace and punctuation artifacts
 		$occupation =~ tr/\r\n/ /;
 		$occupation =~ s/\.+$//;
@@ -352,7 +353,7 @@ sub normalise {
 		# Step 1: filter out non-occupations
 		next if $FILTER{lc($occupation)};
 		my $filtered = 0;
-		foreach my $pattern(@FILTER_PATTERNS) {
+		foreach my $pattern (@FILTER_PATTERNS) {
 			if($occupation =~ $pattern) {
 				$filtered = 1;
 				last;
@@ -360,12 +361,12 @@ sub normalise {
 		}
 		next if $filtered;
 
-		# Step 3: normalise the occupation string
+		# Step 2: normalise the occupation string
 		$occupation = _normalise_single($occupation);
 		next unless length($occupation);
 
-		# Step 2: deduplicate against previous entry in the list
-		next if(@result && (lc($result[-1]) eq lc($occupation)));
+		# Step 3: deduplicate against the previous normalised entry
+		next if @result && lc($result[-1]) eq lc($occupation);
 
 		# Step 4: apply locale-specific spellings for English variants
 		if($language eq 'en') {
@@ -440,7 +441,7 @@ sub _normalise_single {
 		return "$1 worker";
 	}
 
-	# Convert "X Cleaner" prefix form to "X cleaner"
+	# Convert "Cleaner X" prefix form to "X cleaner"
 	if($occupation =~ /^Cleaner\s+(.+)/i) {
 		return "$1 cleaner";
 	}
@@ -488,12 +489,23 @@ sub _normalise_single {
 	}
 
 	# Convert pluralised trade forms e.g. "Builders Labourer"
-	# to possessive "Builder's Labourer" - but avoid "Bus Driver"
+	# to possessive "Builder's Labourer".
+	#
+	# The regex captures:
+	#   $base ($1) - the word stem without the trailing 's'
+	#   $last ($2) - the final character of $base (used to reconstruct
+	#                the stem; not used in the guard comparison)
+	#   $role ($3) - the following word
+	#
+	# Guard against false positives: "Bus Driver" ($base eq 'Bu') and
+	# "Harness Maker" ($base eq 'Harnes') must not be rewritten.
+	# Compare against $base directly - using "$base$last" is wrong
+	# because it appends the final character a second time.
 	if($occupation !~ /gas works/i
 		&& $occupation =~ /^(.+([a-z]))s\s+([a-z]+)$/i) {
 		my ($base, $last, $role) = ($1, $2, $3);
-		unless("$base$last" eq 'Bu' || "$base$last" eq 'Harnes') {
-			return "$base$last's $role";
+		unless(lc($base) eq 'bu' || lc($base) eq 'harnes') {
+			return "$base's $role";
 		}
 	}
 
@@ -512,35 +524,39 @@ sub _normalise_single {
 #   Handles en_US (labour->labor), en_CA, and en_GB (default) variants.
 #
 # Entry criteria:
-#   $occupation - a normalised English occupation string
+#   $occupation - a normalised English occupation string (may be title-cased)
 #
 # Exit status:
 #   Returns the occupation string with locale-appropriate spellings.
+#   Original capitalisation is preserved; Lingua::EN::ABC performs
+#   case-insensitive substitutions and does not require lowercased input.
 #
 # Side effects:
 #   None.
 #
 # Notes:
-#   Reads $ENV{'LANG'} and $ENV{'LC_ALL'} to determine the locale.
+#   Reads $ENV{'LANG'} to determine the locale.
 #   Defaults to British English if no locale is detected.
+#   Do NOT pass lc($occupation) here - doing so strips title case that
+#   cannot be fully recovered by ucfirst() alone.
 
 sub _apply_locale {
 	my $occupation = shift;
 
 	# Apply American English spelling variants
 	if(defined($ENV{'LANG'}) && ($ENV{'LANG'} =~ /^en_US/)) {
-		$occupation = Lingua::EN::ABC::b2a(lc($occupation));
+		$occupation = Lingua::EN::ABC::b2a($occupation);
 		$occupation =~ s/labour/labor/ig;
 		return $occupation;
 	}
 
 	# Apply Canadian English spelling variants
 	if(defined($ENV{'LANG'}) && ($ENV{'LANG'} =~ /^en_CA/)) {
-		return Lingua::EN::ABC::b2c(lc($occupation));
+		return Lingua::EN::ABC::b2c($occupation);
 	}
 
 	# Default to British English spelling
-	return Lingua::EN::ABC::a2b(lc($occupation));
+	return Lingua::EN::ABC::a2b($occupation);
 }
 
 # _translate_french
@@ -580,7 +596,10 @@ sub _translate_french {
 
 	# Handle X Farmer pattern
 	if($occupation =~ /^(.+)\sFarmer$/i) {
-		return $sex eq 'F' ? "Agricultrice $1" : "Agriculteur $1";
+		my $type = $1;
+		return $sex eq 'F'
+			? "Agricultrice de $type"
+			: "Agriculteur de $type";
 	}
 
 	# Check the French translation lookup table
@@ -593,7 +612,7 @@ sub _translate_french {
 
 	# Fall back to English with optional warning
 	if($warn_on_error) {
-		carp "Genealogy::Occupation: no French translation for '$occupation'";
+		Carp::carp "Genealogy::Occupation: no French translation for '$occupation'";
 	}
 
 	return $occupation;
@@ -649,7 +668,7 @@ sub _translate_german {
 
 	# Fall back to English with optional warning
 	if($warn_on_error) {
-		carp "Genealogy::Occupation: no German translation for '$occupation'";
+		Carp::carp "Genealogy::Occupation: no German translation for '$occupation'";
 	}
 
 	return $occupation;
@@ -688,7 +707,7 @@ sub _get_language {
 	if(($ENV{'LANGUAGE'}) && ($ENV{'LANGUAGE'} =~ /^([a-z]{2})/i)) {
 		return lc($1);
 	}
-	foreach my $variable('LC_ALL', 'LC_MESSAGES', 'LANG') {
+	foreach my $variable ('LC_ALL', 'LC_MESSAGES', 'LANG') {
 		my $val = $ENV{$variable};
 		next unless defined($val);
 		if($val =~ /^([a-z]{2})/i) {
@@ -704,7 +723,7 @@ sub _get_language {
 
 =head1 AUTHOR
 
-Nigel Horne C<< <njh@bandsman.co.uk> >>
+Nigel Horne C<< <njh@nigelhorne.com> >>
 
 =head1 BUGS
 
