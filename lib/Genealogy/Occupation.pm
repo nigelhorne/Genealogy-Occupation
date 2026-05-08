@@ -6,6 +6,7 @@ use 5.014;
 
 use Carp qw(croak);
 use I18N::LangTags::Detect;
+
 use Lingua::EN::ABC;
 use Params::Get;
 use Params::Validate::Strict qw(validate_strict);
@@ -723,7 +724,7 @@ sub _get_language {
 
 =head1 AUTHOR
 
-Nigel Horne C<< <njh@nigelhorne.com> >>
+Nigel Horne C<< <njh@bandsman.co.uk> >>
 
 =head1 BUGS
 

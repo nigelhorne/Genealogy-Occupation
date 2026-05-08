@@ -3,6 +3,16 @@ use warnings;
 use Test::Most;
 use Test::Mockingbird;
 
+# I18N::LangTags::Detect::detect has a () prototype that causes
+# Test::Mockingbird to emit "Prototype mismatch" warnings on
+# mock/unmock.  Strip it here in the test so the production module
+# is unaffected.
+{
+	no warnings qw(prototype redefine);
+	my $orig = \&I18N::LangTags::Detect::detect;
+	*I18N::LangTags::Detect::detect = sub { $orig->() };
+}
+
 # We test private functions directly as standalone functions,
 # so we need access to the package internals
 use_ok('Genealogy::Occupation');
