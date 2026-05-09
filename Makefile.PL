@@ -32,7 +32,7 @@ WriteMakefile(
 		'Return::Set' => 0,
 	}, TEST_REQUIRES => {
 		'Test::Most' => 0,
-		'Test::Mockingbird' => 0,
+		'Test::Mockingbird' => 0.10,
 	}, dist => $dist,
 	clean => { FILES => 'Genealogy-Occupation-*' },	# Clean up distribution files
 	META_MERGE => {	# https://perldoc.perl.org/CPAN::Meta::Spec
