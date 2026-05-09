@@ -435,8 +435,7 @@ subtest 'German locale - self-employed and retired suffixes replaced' => sub {
 	# neither strip nor Farmer-pattern interferes.
 	my $result = $obj->normalise(occupation => 'Retired Carpenter', sex => 'M');
 	is(scalar @{$result}, 1, 'one result for "Retired Carpenter" in German');
-	like($result->[0], qr/ruhestand/i,
-		'"Retired" in non-Farmer occupation replaced with German equivalent');
+	like($result->[0], qr/ruhestand/i, '"Retired" in non-Farmer occupation replaced with German equivalent');
 };
 
 subtest 'German locale - unknown occupation falls back to English with carp' => sub {

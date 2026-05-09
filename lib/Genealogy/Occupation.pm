@@ -152,7 +152,7 @@ Processing steps applied in order:
 
 =item 2. Normalise abbreviations and malformed entries to canonical forms
 
-=item 3. Deduplicate consecutive identical or equivalent entries
+=item 3. Deduplicate consecutive identical or equivalent entries (compared on pre-translation normalised forms)
 
 =item 4. Apply locale-specific spellings via C<Lingua::EN::ABC>
 
@@ -340,6 +340,12 @@ sub normalise {
 
 	my $language = $self->{language} // 'en';
 	my @result;
+	# Track the last normalised English form for deduplication.  We cannot
+	# use $result[-1] for this because @result stores the translated output;
+	# comparing a translated value against a pre-translation English string
+	# means consecutive identical occupations are never deduplicated in
+	# French or German locales.
+	my $last_normalised = '';
 
 	foreach my $occupation (@{$occupations}) {
 		# Clean up whitespace and punctuation artifacts
@@ -365,8 +371,10 @@ sub normalise {
 		$occupation = _normalise_single($occupation);
 		next unless length($occupation);
 
-		# Step 3: deduplicate against the previous normalised entry
-		next if @result && lc($result[-1]) eq lc($occupation);
+		# Step 3: deduplicate against the previous normalised (pre-translation)
+		# entry, not against $result[-1] which holds the translated form
+		next if lc($last_normalised) eq lc($occupation);
+		$last_normalised = $occupation;
 
 		# Step 4: apply locale-specific spellings for English variants
 		if($language eq 'en') {
