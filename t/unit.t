@@ -177,7 +177,7 @@ subtest 'normalise() - Unemployed filtered out' => sub {
 subtest 'normalise() - Scholar and School patterns filtered out' => sub {
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
-	my $obj = Genealogy::Occupation->new();
+	my $obj = new_ok('Genealogy::Occupation');
 
 	# Filter pattern: ^scho(?:ol|lar)
 	is_deeply($obj->normalise(occupation => 'Scholar'),   [], 'Scholar filtered');
