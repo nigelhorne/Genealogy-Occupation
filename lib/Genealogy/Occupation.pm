@@ -6,7 +6,6 @@ use 5.014;
 
 use Carp qw(croak);
 use I18N::LangTags::Detect;
-
 use Lingua::EN::ABC;
 use Params::Get;
 use Params::Validate::Strict qw(validate_strict);
@@ -480,7 +479,7 @@ sub _normalise_single {
 			return "Butcher's Assistant";
 		}
 		unless($trade =~ /'s$/ || lc($trade) eq 'shop') {
-			return "$trade's Assistant";
+			return "${trade}'s Assistant";
 		}
 	}
 
@@ -506,7 +505,7 @@ sub _normalise_single {
 		&& $occupation =~ /^(.+([a-z]))s\s+([a-z]+)$/i) {
 		my ($base, $last, $role) = ($1, $2, $3);
 		unless(lc($base) eq 'bu' || lc($base) eq 'harnes') {
-			return "$base's $role";
+			return "${base}'s $role";
 		}
 	}
 
