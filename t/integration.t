@@ -94,7 +94,7 @@ subtest 'full pipeline - filter then normalise then dedup (British English)' => 
 	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 
-	my $obj = Genealogy::Occupation->new();
+	my $obj = new_ok('Genealogy::Occupation');
 
 	# Step 1 (filter) + step 2 (normalise) + step 3 (dedup) all in one call.
 	# 'Retired' is filtered; the two Ag Lab variants normalise to the same
