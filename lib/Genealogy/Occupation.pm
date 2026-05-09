@@ -768,7 +768,9 @@ L<https://github.com/nigelhorne/Genealogy-Occupation/issues>
 
 Copyright 2026 Nigel Horne.
 
-This program is released under the following licence: GPL2
+Usage is subject to GPL2 licence terms.
+If you use it,
+please let me know.
 
 =cut
 

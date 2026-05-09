@@ -39,7 +39,7 @@ Processing steps applied in order:
 
 - 1. Filter out non-occupations (Scholar, Retired, Domestic Duties etc)
 - 2. Normalise abbreviations and malformed entries to canonical forms
-- 3. Deduplicate consecutive identical or equivalent entries
+- 3. Deduplicate consecutive identical or equivalent entries (compared on pre-translation normalised forms)
 - 4. Apply locale-specific spellings via `Lingua::EN::ABC`
 - 5. Translate to French or German if system locale requires it
 
@@ -162,7 +162,7 @@ multiple calls.
 
 # AUTHOR
 
-Nigel Horne `<njh@nigelhorne.com>`
+Nigel Horne `<njh@bandsman.co.uk>`
 
 # BUGS
 
@@ -186,4 +186,6 @@ Please report bugs via the GitHub issue tracker:
 
 Copyright 2026 Nigel Horne.
 
-This program is released under the following licence: GPL2
+Usage is subject to GPL2 licence terms.
+If you use it,
+please let me know.
