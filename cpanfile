@@ -16,6 +16,7 @@ on 'configure' => sub {
 };
 
 on 'test' => sub {
+	requires 'Test::DescribeMe';
 	requires 'Test::Mockingbird', '0.10';
 	requires 'Test::Most';
 };
