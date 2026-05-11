@@ -1,0 +1,182 @@
+{
+   "runs" : [
+      {
+         "OS" : "linux",
+         "abstract" : "Normalise and translate genealogical occupation strings",
+         "dir" : "/home/runner/work/Genealogy-Occupation/Genealogy-Occupation",
+         "finish" : 1778501796.82269,
+         "name" : "Genealogy-Occupation",
+         "perl" : "5.40.4",
+         "run" : "-e",
+         "start" : 1778501793.29501,
+         "version" : "0.02"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Normalise and translate genealogical occupation strings",
+         "dir" : "/home/runner/work/Genealogy-Occupation/Genealogy-Occupation",
+         "finish" : 1778501793.44042,
+         "name" : "Genealogy-Occupation",
+         "perl" : "5.40.4",
+         "run" : "-e",
+         "start" : 1778501793.44031,
+         "version" : "0.02"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Normalise and translate genealogical occupation strings",
+         "dir" : "/home/runner/work/Genealogy-Occupation/Genealogy-Occupation",
+         "finish" : 1778501793.74296,
+         "name" : "Genealogy-Occupation",
+         "perl" : "5.40.4",
+         "run" : "t/00-load.t",
+         "start" : 1778501793.70218,
+         "version" : "0.02"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Normalise and translate genealogical occupation strings",
+         "dir" : "/home/runner/work/Genealogy-Occupation/Genealogy-Occupation",
+         "finish" : 1778501794.23662,
+         "name" : "Genealogy-Occupation",
+         "perl" : "5.40.4",
+         "run" : "t/edge_cases.t",
+         "start" : 1778501794.06771,
+         "version" : "0.02"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Normalise and translate genealogical occupation strings",
+         "dir" : "/home/runner/work/Genealogy-Occupation/Genealogy-Occupation",
+         "finish" : 1778501794.61608,
+         "name" : "Genealogy-Occupation",
+         "perl" : "5.40.4",
+         "run" : "t/eof.t",
+         "start" : 1778501794.61582,
+         "version" : "0.02"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Normalise and translate genealogical occupation strings",
+         "dir" : "/home/runner/work/Genealogy-Occupation/Genealogy-Occupation",
+         "finish" : 1778501794.85326,
+         "name" : "Genealogy-Occupation",
+         "perl" : "5.40.4",
+         "run" : "t/eol.t",
+         "start" : 1778501794.85299,
+         "version" : "0.02"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Normalise and translate genealogical occupation strings",
+         "dir" : "/home/runner/work/Genealogy-Occupation/Genealogy-Occupation",
+         "finish" : 1778501795.24654,
+         "name" : "Genealogy-Occupation",
+         "perl" : "5.40.4",
+         "run" : "t/extended_tests.t",
+         "start" : 1778501795.11644,
+         "version" : "0.02"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Normalise and translate genealogical occupation strings",
+         "dir" : "/home/runner/work/Genealogy-Occupation/Genealogy-Occupation",
+         "finish" : 1778501795.73114,
+         "name" : "Genealogy-Occupation",
+         "perl" : "5.40.4",
+         "run" : "t/function.t",
+         "start" : 1778501795.6537,
+         "version" : "0.02"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Normalise and translate genealogical occupation strings",
+         "dir" : "/home/runner/work/Genealogy-Occupation/Genealogy-Occupation",
+         "finish" : 1778501796.18678,
+         "name" : "Genealogy-Occupation",
+         "perl" : "5.40.4",
+         "run" : "t/integration.t",
+         "start" : 1778501796.08926,
+         "version" : "0.02"
+      },
+      {
+         "OS" : "linux",
+         "abstract" : "Normalise and translate genealogical occupation strings",
+         "dir" : "/home/runner/work/Genealogy-Occupation/Genealogy-Occupation",
+         "finish" : 1778501796.66228,
+         "name" : "Genealogy-Occupation",
+         "perl" : "5.40.4",
+         "run" : "t/unit.t",
+         "start" : 1778501796.5604,
+         "version" : "0.02"
+      }
+   ],
+   "summary" : {
+      "Total" : {
+         "branch" : {
+            "covered" : 96,
+            "error" : 0,
+            "percentage" : 100,
+            "total" : 96,
+            "uncoverable" : 0
+         },
+         "condition" : {
+            "covered" : 35,
+            "error" : 6,
+            "percentage" : 85.3658536585366,
+            "total" : 41,
+            "uncoverable" : 0
+         },
+         "statement" : {
+            "covered" : 164,
+            "percentage" : 100,
+            "total" : 164
+         },
+         "subroutine" : {
+            "covered" : 17,
+            "percentage" : 100,
+            "total" : 17
+         },
+         "total" : {
+            "covered" : 312,
+            "error" : 6,
+            "percentage" : 98.1132075471698,
+            "total" : 318,
+            "uncoverable" : 0
+         }
+      },
+      "blib/lib/Genealogy/Occupation.pm" : {
+         "branch" : {
+            "covered" : 96,
+            "error" : 0,
+            "percentage" : 100,
+            "total" : 96,
+            "uncoverable" : 0
+         },
+         "condition" : {
+            "covered" : 35,
+            "error" : 6,
+            "percentage" : 85.3658536585366,
+            "total" : 41,
+            "uncoverable" : 0
+         },
+         "statement" : {
+            "covered" : 164,
+            "percentage" : 100,
+            "total" : 164
+         },
+         "subroutine" : {
+            "covered" : 17,
+            "percentage" : 100,
+            "total" : 17
+         },
+         "total" : {
+            "covered" : 312,
+            "error" : 6,
+            "percentage" : 98.1132075471698,
+            "total" : 318,
+            "uncoverable" : 0
+         }
+      }
+   }
+}
