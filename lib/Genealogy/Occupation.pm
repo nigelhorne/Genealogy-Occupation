@@ -4,6 +4,8 @@ use strict;
 use warnings;
 use 5.014;
 
+# TODO: railway/railroad = le chemin de fer
+
 use Carp qw(croak);
 use I18N::LangTags::Detect;
 use Lingua::EN::ABC;
