@@ -329,6 +329,29 @@ subtest 'normalise() - non-consecutive duplicates are preserved' => sub {
 	);
 };
 
+subtest 'normalise() - consecutive duplicates deduplicate in non-English locale' => sub {
+	# Regression test for the $last_normalised fix (0.02): dedup previously
+	# compared the already-translated $result[-1] against the incoming
+	# English-normalised string, so two consecutive 'Farmer' entries both
+	# became 'Agriculteur' without being collapsed.
+	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { 'fr' });
+	my $obj = Genealogy::Occupation->new();
+
+	# Two identical English occupations must collapse to one translated form
+	is_deeply(
+		$obj->normalise(occupation => ['Farmer', 'Farmer'], sex => 'M'),
+		['Agriculteur'],
+		'consecutive Farmer pair collapses to one Agriculteur in French locale'
+	);
+
+	# Non-consecutive duplicates must still both appear
+	is_deeply(
+		$obj->normalise(occupation => ['Farmer', 'Teacher', 'Farmer'], sex => 'M'),
+		['Agriculteur', 'Professeur', 'Agriculteur'],
+		'non-consecutive Farmer entries both translated in French locale'
+	);
+};
+
 # -----------------------------------------------------------------------
 # normalise() - French translation
 # -----------------------------------------------------------------------

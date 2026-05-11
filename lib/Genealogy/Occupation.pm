@@ -1,22 +1,23 @@
 package Genealogy::Occupation;
 
+# TODO: railway/railroad = le chemin de fer
+
 use strict;
 use warnings;
 use 5.014;
-
-# TODO: railway/railroad = le chemin de fer
 
 use Carp qw(croak);
 use I18N::LangTags::Detect;
 use Lingua::EN::ABC;
 use Params::Get;
+use Readonly;
 use Params::Validate::Strict qw(validate_strict);
 use Return::Set qw(set_return);
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 # Schema for new() arguments
-my $NEW_SCHEMA = {
+Readonly my $NEW_SCHEMA => {
 	warn_on_error => {
 		type     => 'boolean',
 		optional => 1,
@@ -29,7 +30,7 @@ my $NEW_SCHEMA = {
 # validate_strict is called, because Params::Validate::Strict does not
 # yet support union types.  Only the remaining named arguments (sex)
 # are validated here.
-my $NORMALISE_SCHEMA = {
+Readonly my $NORMALISE_SCHEMA => {
 	sex => {
 		type     => 'string',
 		optional => 1,
@@ -39,13 +40,13 @@ my $NORMALISE_SCHEMA = {
 
 # Occupations to filter out entirely - these are not real occupations
 # but rather descriptions of status or domestic roles
-my %FILTER = map { lc($_) => 1 } qw(
+Readonly my %FILTER => map { lc($_) => 1 } qw(
 	unemployed
 	retired
 );
 
 # Filter patterns - matched case-insensitively against the occupation
-my @FILTER_PATTERNS = (
+Readonly my @FILTER_PATTERNS => (
 	qr/^scho(?:ol|lar)/i,
 	qr/wife$/i,
 	qr/seeking work/i,
@@ -57,7 +58,7 @@ my @FILTER_PATTERNS = (
 
 # Direct lookup table for exact normalisation matches.
 # Keyed on lowercase occupation string.
-my %DIRECT = (
+Readonly my %DIRECT => (
 	'ag lab'                          => 'Agricultural Labourer',
 	'ag labourer'                     => 'Agricultural Labourer',
 	'ag labourer pauper'              => 'Agricultural Labourer',
@@ -89,12 +90,12 @@ my %DIRECT = (
 );
 
 # Pattern that matches "general serv*dom*" variants
-my $GENERAL_SERVANT_RE = qr/^general serv.+dom/i;
+Readonly my $GENERAL_SERVANT_RE => qr/^general serv.+dom/i;
 
 # French translations keyed on lowercase English occupation.
 # Values are either a plain string or a hashref with M/F keys
 # for gendered translations.
-my %FRENCH = (
+Readonly my %FRENCH => (
 	'postman'   => { M => 'Facteur',      F => 'Factrice' },
 	'farmer'    => { M => 'Agriculteur',  F => 'Agricultrice' },
 	'teacher'   => 'Professeur',
@@ -103,10 +104,11 @@ my %FRENCH = (
 
 # German translations keyed on lowercase English occupation.
 # Values are either a plain string or a hashref with M/F keys.
-my %GERMAN = (
-	'teacher'    => { M => 'Lehrer',     F => 'Lehrerin' },
-	'farmer'     => { M => 'Bauer',      F => 'Bauerin' },
-	'bus driver' => { M => 'Busfahrer',  F => 'Busfahrerin' },
+Readonly my %GERMAN => (
+    'teacher'    => { M => 'Lehrer',     F => 'Lehrerin' },
+    'farmer'     => { M => 'Bauer',      F => 'Bauerin' },
+    'bus driver' => { M => 'Busfahrer',  F => 'Busfahrerin' },
+    'doctor'     => 'Arzt',   # simplified non-gendered form for fallback
 );
 
 =head1 NAME
@@ -115,7 +117,7 @@ Genealogy::Occupation - Normalise and translate genealogical occupation strings
 
 =head1 VERSION
 
-Version 0.01
+Version 0.02
 
 =head1 SYNOPSIS
 
@@ -299,6 +301,12 @@ be translated, emits a warning via C<carp>.
 Deduplication operates across the full list of occupations passed in.
 Processing a single occupation at a time will not deduplicate across
 multiple calls.
+
+Deduplication compares the pre-translation normalised English forms, not
+the translated output.  This means two consecutive identical English
+occupations correctly collapse to one entry even in French or German
+locales, where the translated results stored in the output array would
+otherwise never match the incoming English string.
 
 =head3 Example
 
@@ -733,7 +741,7 @@ sub _get_language {
 
 =head1 AUTHOR
 
-Nigel Horne C<< <njh@nigelhorne.com> >>
+Nigel Horne C<< <njh@bandsman.co.uk> >>
 
 =head1 BUGS
 
@@ -772,9 +780,8 @@ L<https://github.com/nigelhorne/Genealogy-Occupation/issues>
 
 Copyright 2026 Nigel Horne.
 
-Usage is subject to GPL2 licence terms.
-If you use it,
-please let me know.
+This program is released under the following licence: GPL2
+If you use it, please let me know.
 
 =cut
 

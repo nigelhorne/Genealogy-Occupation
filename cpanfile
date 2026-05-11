@@ -7,6 +7,7 @@ requires 'I18N::LangTags::Detect';
 requires 'Lingua::EN::ABC';
 requires 'Params::Get';
 requires 'Params::Validate::Strict';
+requires 'Readonly';
 requires 'Return::Set';
 requires 'strict';
 requires 'warnings';

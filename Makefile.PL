@@ -29,6 +29,7 @@ WriteMakefile(
 		'Lingua::EN::ABC' => 0,
 		'Params::Get' => 0,
 		'Params::Validate::Strict' => 0,
+		'Readonly' => 0,
 		'Return::Set' => 0,
 	}, TEST_REQUIRES => {
 		'Test::DescribeMe' => 0,

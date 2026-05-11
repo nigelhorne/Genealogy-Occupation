@@ -23,26 +23,6 @@ use Test::Mockingbird 0.10 qw(mock_scoped);
 # Verify the module loads cleanly before running any other tests
 use_ok('Genealogy::Occupation') or BAIL_OUT('Cannot load Genealogy::Occupation');
 
-# -----------------------------------------------------------------------
-# Helper: localise the environment to a known state for a subtest.
-# All locale env vars that I18N::LangTags::Detect reads are clobbered
-# so that the language we request is the language we get.
-# -----------------------------------------------------------------------
-
-sub _locale_env {
-	my $lang = shift;
-
-	# LANGUAGE, LC_ALL and LC_MESSAGES take precedence over LANG in some
-	# implementations; delete them so LANG is the sole source of truth.
-	delete local $ENV{LANGUAGE};
-	delete local $ENV{LC_ALL};
-	delete local $ENV{LC_MESSAGES};
-	local $ENV{LANG} = $lang;
-
-	# Return a coderef that runs the caller's block inside this environment.
-	# Usage: _locale_env('fr_FR.UTF-8')->(sub { ... })
-	return sub { $_[0]->() };
-}
 
 # -----------------------------------------------------------------------
 # Construction - use_ok already done above; new_ok exercises real new()
@@ -94,7 +74,7 @@ subtest 'full pipeline - filter then normalise then dedup (British English)' => 
 	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 
-	my $obj = new_ok('Genealogy::Occupation');
+	my $obj = Genealogy::Occupation->new();
 
 	# Step 1 (filter) + step 2 (normalise) + step 3 (dedup) all in one call.
 	# 'Retired' is filtered; the two Ag Lab variants normalise to the same
@@ -134,7 +114,8 @@ subtest 'full pipeline - all direct-table entries pass through intact' => sub {
 		'Labourer Builders'    => "Builder's Labourer",
 		'PFC US Army'          => 'Private First Class',
 	);
-	while(my ($input, $expected) = each %cases) {
+	for my $input (sort keys %cases) {
+		my $expected = $cases{$input};
 		is_deeply(
 			$obj->normalise(occupation => $input),
 			[$expected],
@@ -435,7 +416,8 @@ subtest 'German locale - self-employed and retired suffixes replaced' => sub {
 	# neither strip nor Farmer-pattern interferes.
 	my $result = $obj->normalise(occupation => 'Retired Carpenter', sex => 'M');
 	is(scalar @{$result}, 1, 'one result for "Retired Carpenter" in German');
-	like($result->[0], qr/ruhestand/i, '"Retired" in non-Farmer occupation replaced with German equivalent');
+	like($result->[0], qr/ruhestand/i,
+		'"Retired" in non-Farmer occupation replaced with German equivalent');
 };
 
 subtest 'German locale - unknown occupation falls back to English with carp' => sub {

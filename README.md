@@ -4,7 +4,7 @@ Genealogy::Occupation - Normalise and translate genealogical occupation strings
 
 # VERSION
 
-Version 0.01
+Version 0.02
 
 # SYNOPSIS
 
@@ -147,6 +147,12 @@ Deduplication operates across the full list of occupations passed in.
 Processing a single occupation at a time will not deduplicate across
 multiple calls.
 
+Deduplication compares the pre-translation normalised English forms, not
+the translated output.  This means two consecutive identical English
+occupations correctly collapse to one entry even in French or German
+locales, where the translated results stored in the output array would
+otherwise never match the incoming English string.
+
 ### Example
 
     my $result = $normaliser->normalise(
@@ -162,7 +168,7 @@ multiple calls.
 
 # AUTHOR
 
-Nigel Horne `<njh@nigelhorne.com>`
+Nigel Horne `<njh@bandsman.co.uk>`
 
 # BUGS
 
@@ -187,6 +193,5 @@ Please report bugs via the GitHub issue tracker:
 
 Copyright 2026 Nigel Horne.
 
-Usage is subject to GPL2 licence terms.
-If you use it,
-please let me know.
+This program is released under the following licence: GPL2
+If you use it, please let me know.

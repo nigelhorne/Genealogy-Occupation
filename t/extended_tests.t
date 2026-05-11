@@ -480,22 +480,23 @@ subtest 'direct table - additional entries verified individually' => sub {
 
 	# Entries not hit in any other test file
 	my %cases = (
-		'Ag Labourer Pauper'               => 'Agricultural Labourer',
-		'Agric Labourer'                   => 'Agricultural Labourer',
-		'Agril Labourer'                   => 'Agricultural Labourer',
-		'Agricultural Farm Labourer'       => 'Agricultural Labourer',
+		'Ag Labourer Pauper'			   => 'Agricultural Labourer',
+		'Agric Labourer'				   => 'Agricultural Labourer',
+		'Agril Labourer'				   => 'Agricultural Labourer',
+		'Agricultural Farm Labourer'	   => 'Agricultural Labourer',
 		'Ordinary Agricultural Labourer'   => 'Agricultural Labourer',
-		'Work on farm'                     => 'Agricultural Labourer',
-		'Ag Lab Pauper'                    => 'Agricultural Labourer',
-		'Labourer Ag'                      => 'Agricultural Labourer',
-		'Labourer Gas Stoker'              => 'Gas Stoker',
-		'Gardner and Domestic Servant'     => 'Gardener and Domestic',
-		'Domestic Under Gardner'           => 'Domestic Gardener',
-		'Plate Glass Cutter'               => 'Plate Glass Cutter',
-		'Gardener Domestic'                => 'Gardener and Domestic',
-		'Under Gardener Domestic'          => 'Domestic Gardener',
+		'Work on farm'					 => 'Agricultural Labourer',
+		'Ag Lab Pauper'					=> 'Agricultural Labourer',
+		'Labourer Ag'					  => 'Agricultural Labourer',
+		'Labourer Gas Stoker'			  => 'Gas Stoker',
+		'Gardner and Domestic Servant'	 => 'Gardener and Domestic',
+		'Domestic Under Gardner'		   => 'Domestic Gardener',
+		'Plate Glass Cutter'			   => 'Plate Glass Cutter',
+		'Gardener Domestic'				=> 'Gardener and Domestic',
+		'Under Gardener Domestic'		  => 'Domestic Gardener',
 	);
-	while(my ($input, $expected) = each %cases) {
+	for my $input (sort keys %cases) {
+		my $expected = $cases{$input};
 		is_deeply(
 			$obj->normalise(occupation => $input),
 			[$expected],
@@ -550,17 +551,17 @@ subtest 'French locale: mixed array with translatable and untranslatable entries
 	# all in one normalise() call with French active
 	my $result = $obj->normalise(
 		occupation => [
-			'Retired',          # filtered
-			'Farmer',           # translates: Agriculteur
-			'Farmer',           # deduped
-			'Wigmaker',         # falls back to English
-			'Teacher',          # translates: Professeur
+			'Retired',		  # filtered
+			'Farmer',		   # translates: Agriculteur
+			'Farmer',		   # deduped
+			'Wigmaker',		 # falls back to English
+			'Teacher',		  # translates: Professeur
 		],
 		sex => 'M',
 	);
 	is(scalar @{$result}, 3, 'three distinct results after filter and dedup');
 	is($result->[0], 'Agriculteur', 'first result: Farmer → Agriculteur');
-	is($result->[1], 'Wigmaker',    'second result: Wigmaker falls back to English');
+	is($result->[1], 'Wigmaker',	'second result: Wigmaker falls back to English');
 	is($result->[2], 'Professeur',  'third result: Teacher → Professeur');
 };
 
@@ -571,16 +572,16 @@ subtest 'German locale: mixed array exercises all German branches' => sub {
 	# Filter + teaching path + lookup path + X Farmer path + fallback
 	my $result = $obj->normalise(
 		occupation => [
-			'Scholar',         # filtered
-			'Teaching',        # → Lehrer (M)
-			'Bus Driver',      # → Busfahrer (M)
-			'Dairy Farmer',    # → Landwirt (M)
-			'Wigmaker',        # fallback to English
+			'Scholar',		 # filtered
+			'Teaching',		# → Lehrer (M)
+			'Bus Driver',	  # → Busfahrer (M)
+			'Dairy Farmer',	# → Landwirt (M)
+			'Wigmaker',		# fallback to English
 		],
 		sex => 'M',
 	);
 	is(scalar @{$result}, 4, 'four results after filter');
-	is($result->[0], 'Lehrer',     'Teaching → Lehrer');
+	is($result->[0], 'Lehrer',	 'Teaching → Lehrer');
 	is($result->[1], 'Busfahrer',  'Bus Driver → Busfahrer');
 	is($result->[2], 'Landwirt',   'Dairy Farmer → Landwirt');
 	is($result->[3], 'Wigmaker',   'Wigmaker falls back to English');
@@ -655,6 +656,19 @@ subtest 'General Servant Domestic regex variants all produce Domestic Servant' =
 		['Domestic Servant'], 'general servant of the domestic matches');
 	is_deeply($obj->normalise(occupation => 'GENERAL SERVANT DOMESTIC'),
 		['Domestic Servant'], 'case-insensitive match on general servant regex');
+};
+
+subtest '_translate_german - non-gendered scalar table entry returned as-is' => sub {
+	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { 'de' });
+	my $obj = Genealogy::Occupation->new();
+
+	# 'doctor' => 'Arzt' is a plain string entry (not a hashref);
+	# exercises the scalar return $translation branch, killing
+	# the BOOL_NEGATE_676 and RETURN_UNDEF_676 mutants
+	is_deeply($obj->normalise(occupation => 'Doctor', sex => 'M'),
+		['Arzt'], 'non-gendered German table entry returned as-is (M)');
+	is_deeply($obj->normalise(occupation => 'Doctor', sex => 'F'),
+		['Arzt'], 'non-gendered German table entry same for F');
 };
 
 done_testing();
