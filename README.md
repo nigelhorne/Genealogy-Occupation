@@ -162,7 +162,7 @@ multiple calls.
 
 # AUTHOR
 
-Nigel Horne `<njh@bandsman.co.uk>`
+Nigel Horne `<njh@nigelhorne.com>`
 
 # BUGS
 
@@ -177,6 +177,7 @@ Please report bugs via the GitHub issue tracker:
 
 # SEE ALSO
 
+- [Test Dashboard](https://nigelhorne.github.io/Genealogy-Occupation/coverage/)
 - [Lingua::EN::ABC](https://metacpan.org/pod/Lingua%3A%3AEN%3A%3AABC)
 - [Params::Get](https://metacpan.org/pod/Params%3A%3AGet)
 - [Params::Validate::Strict](https://metacpan.org/pod/Params%3A%3AValidate%3A%3AStrict)

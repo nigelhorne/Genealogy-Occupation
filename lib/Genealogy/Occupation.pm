@@ -733,7 +733,7 @@ sub _get_language {
 
 =head1 AUTHOR
 
-Nigel Horne C<< <njh@bandsman.co.uk> >>
+Nigel Horne C<< <njh@nigelhorne.com> >>
 
 =head1 BUGS
 
@@ -755,6 +755,8 @@ L<https://github.com/nigelhorne/Genealogy-Occupation/issues>
 =head1 SEE ALSO
 
 =over 4
+
+=item * L<Test Dashboard|https://nigelhorne.github.io/Genealogy-Occupation/coverage/>
 
 =item * L<Lingua::EN::ABC>
 
