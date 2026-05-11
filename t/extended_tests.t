@@ -26,6 +26,9 @@ use_ok('Genealogy::Occupation') or BAIL_OUT('Cannot load Genealogy::Occupation')
 # -----------------------------------------------------------------------
 
 subtest '_normalise_single - "heavy worker" suffix stripped' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -41,6 +44,9 @@ subtest '_normalise_single - "heavy worker" suffix stripped' => sub {
 };
 
 subtest '_normalise_single - American "Labor" converted to British "Labour"' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -58,6 +64,9 @@ subtest '_normalise_single - American "Labor" converted to British "Labour"' => 
 };
 
 subtest '_normalise_single - "dom" suffix variant reorders to "Domestic X"' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -72,6 +81,9 @@ subtest '_normalise_single - "dom" suffix variant reorders to "Domestic X"' => s
 };
 
 subtest '_normalise_single - "works for" variant of works pattern' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -87,6 +99,9 @@ subtest '_normalise_single - "works for" variant of works pattern' => sub {
 };
 
 subtest '_normalise_single - "Cleaner X" prefix reordered to "X cleaner"' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -100,6 +115,9 @@ subtest '_normalise_single - "Cleaner X" prefix reordered to "X cleaner"' => sub
 };
 
 subtest '_normalise_single - "Salesman X" prefix reordered to "X Salesman"' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -113,6 +131,9 @@ subtest '_normalise_single - "Salesman X" prefix reordered to "X Salesman"' => s
 };
 
 subtest '_normalise_single - "Shop Assistant X" gets possessive prefix' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -127,6 +148,9 @@ subtest '_normalise_single - "Shop Assistant X" gets possessive prefix' => sub {
 };
 
 subtest '_normalise_single - Assistant passthrough cases' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -143,6 +167,9 @@ subtest '_normalise_single - Assistant passthrough cases' => sub {
 };
 
 subtest '_normalise_single - "police" suffix triggers "officer" append' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -158,6 +185,9 @@ subtest '_normalise_single - "police" suffix triggers "officer" append' => sub {
 };
 
 subtest '_normalise_single - "on farm" pattern inserts article "a"' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -229,6 +259,9 @@ subtest '_get_language - C.UTF-8 locale treated as English' => sub {
 };
 
 subtest '_get_language - detect() returning hyphenated tag extracts prefix' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 
 	# 'fr-FR' → /^([a-z]{2})/i → 'fr'; object should behave as French
@@ -438,6 +471,9 @@ subtest '_apply_locale - Canadian English path does not crash' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'direct table - additional entries verified individually' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -469,6 +505,9 @@ subtest 'direct table - additional entries verified individually' => sub {
 };
 
 subtest 'direct table - "Labourer (Ag)" with parens cleaned before lookup' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -484,6 +523,9 @@ subtest 'direct table - "Labourer (Ag)" with parens cleaned before lookup' => su
 # -----------------------------------------------------------------------
 
 subtest 'sex => "F" in English locale is accepted and ignored gracefully' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -561,6 +603,9 @@ subtest 'warn_on_error carp message contains occupation name and language hint' 
 };
 
 subtest 'normalise() called repeatedly on same object - no state leakage' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -574,6 +619,9 @@ subtest 'normalise() called repeatedly on same object - no state leakage' => sub
 };
 
 subtest 'all five normalise() pipeline steps active in one call' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -592,6 +640,9 @@ subtest 'all five normalise() pipeline steps active in one call' => sub {
 };
 
 subtest 'General Servant Domestic regex variants all produce Domestic Servant' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();

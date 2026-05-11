@@ -23,6 +23,9 @@ use_ok('Genealogy::Occupation') or BAIL_OUT('Cannot load Genealogy::Occupation')
 # Returns ($obj, $guard); caller must keep $guard in scope.
 sub _en {
 	my %args   = @_;
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard  = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj    = Genealogy::Occupation->new(%args);
@@ -38,6 +41,9 @@ sub _en {
 # -----------------------------------------------------------------------
 
 subtest 'cleaning - dots-only string collapses to empty and is skipped' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -48,6 +54,9 @@ subtest 'cleaning - dots-only string collapses to empty and is skipped' => sub {
 };
 
 subtest 'cleaning - parentheses-only string collapses to empty and is skipped' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -62,6 +71,9 @@ subtest 'cleaning - parentheses-only string collapses to empty and is skipped' =
 };
 
 subtest 'cleaning - embedded CR+LF normalised to single space' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -77,6 +89,9 @@ subtest 'cleaning - embedded CR+LF normalised to single space' => sub {
 };
 
 subtest 'cleaning - trailing dots stripped, internal dots become semicolons' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -94,6 +109,9 @@ subtest 'cleaning - trailing dots stripped, internal dots become semicolons' => 
 };
 
 subtest 'cleaning - leading whitespace is NOT stripped (only trailing is)' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -109,6 +127,9 @@ subtest 'cleaning - leading whitespace is NOT stripped (only trailing is)' => su
 };
 
 subtest 'cleaning - tab character within string is not converted by tr' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -129,6 +150,9 @@ subtest 'cleaning - tab character within string is not converted by tr' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'filter - case-insensitive exact-word filter matches all cases' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -141,6 +165,9 @@ subtest 'filter - case-insensitive exact-word filter matches all cases' => sub {
 };
 
 subtest 'filter - "at school" pattern requires exact whole-string match' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -156,6 +183,9 @@ subtest 'filter - "at school" pattern requires exact whole-string match' => sub 
 };
 
 subtest 'filter - "wife" pattern is a suffix anchor (false-positive risk)' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -176,6 +206,9 @@ subtest 'filter - "wife" pattern is a suffix anchor (false-positive risk)' => su
 };
 
 subtest 'filter - "seeking work" is an unanchored substring match' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -188,6 +221,9 @@ subtest 'filter - "seeking work" is an unanchored substring match' => sub {
 };
 
 subtest 'filter - "formerly retired" slips through filter but emerges as Retired' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -208,6 +244,9 @@ subtest 'filter - "formerly retired" slips through filter but emerges as Retired
 # -----------------------------------------------------------------------
 
 subtest 'possessives - Bus Driver is NOT rewritten (lc($base) eq "bu" guard)' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -219,6 +258,9 @@ subtest 'possessives - Bus Driver is NOT rewritten (lc($base) eq "bu" guard)' =>
 };
 
 subtest 'possessives - Harness Maker is NOT rewritten (lc($base) eq "harnes" guard)' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -230,6 +272,9 @@ subtest 'possessives - Harness Maker is NOT rewritten (lc($base) eq "harnes" gua
 };
 
 subtest 'possessives - Gas Works occupations are excluded entirely' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -240,6 +285,9 @@ subtest 'possessives - Gas Works occupations are excluded entirely' => sub {
 };
 
 subtest 'possessives - legitimate trade plurals are rewritten correctly' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -258,6 +306,9 @@ subtest 'possessives - legitimate trade plurals are rewritten correctly' => sub 
 # -----------------------------------------------------------------------
 
 subtest 'Manager patterns - guards prevent rewrite in special forms' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -276,6 +327,9 @@ subtest 'Manager patterns - guards prevent rewrite in special forms' => sub {
 };
 
 subtest 'Foreman "of the" stripping works correctly' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -294,6 +348,9 @@ subtest 'Foreman "of the" stripping works correctly' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'empty arrayref produces empty result without error' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -304,6 +361,9 @@ subtest 'empty arrayref produces empty result without error' => sub {
 };
 
 subtest 'large arrayref of identical entries deduplicates to one' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -315,6 +375,9 @@ subtest 'large arrayref of identical entries deduplicates to one' => sub {
 };
 
 subtest 'large arrayref of all-filtered entries gives empty result' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -334,6 +397,9 @@ subtest 'large arrayref of all-filtered entries gives empty result' => sub {
 };
 
 subtest 'arrayref with empty strings and valid entries mixed' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -349,6 +415,9 @@ subtest 'arrayref with empty strings and valid entries mixed' => sub {
 };
 
 subtest 'arrayref with whitespace-only strings are silently skipped' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -365,6 +434,9 @@ subtest 'arrayref with whitespace-only strings are silently skipped' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'regex-special characters in occupation pass through safely' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -386,6 +458,9 @@ subtest 'regex-special characters in occupation pass through safely' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'Unicode characters in occupation pass through without corruption' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -467,6 +542,9 @@ subtest 'short LANG code without country suffix is accepted' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'undef occupation causes croak' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -479,6 +557,9 @@ subtest 'undef occupation causes croak' => sub {
 };
 
 subtest 'occupation key entirely absent causes croak' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -495,6 +576,9 @@ subtest 'occupation key entirely absent causes croak' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'very long occupation string does not crash or hang' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -511,6 +595,9 @@ subtest 'very long occupation string does not crash or hang' => sub {
 };
 
 subtest 'very long occupation string that matches a filter pattern' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -530,6 +617,9 @@ subtest 'very long occupation string that matches a filter pattern' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'deduplication is case-insensitive on the normalised form' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -547,6 +637,9 @@ subtest 'deduplication is case-insensitive on the normalised form' => sub {
 };
 
 subtest 'alternating non-consecutive duplicates all survive' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -564,6 +657,9 @@ subtest 'alternating non-consecutive duplicates all survive' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'general servant regex matches expected variants' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();

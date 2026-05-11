@@ -25,6 +25,9 @@ use_ok('Genealogy::Occupation') or BAIL_OUT('Cannot load Genealogy::Occupation')
 
 subtest 'new() - returns a blessed Genealogy::Occupation object' => sub {
 	# Suppress language detection so the result is locale-independent
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 
@@ -32,6 +35,9 @@ subtest 'new() - returns a blessed Genealogy::Occupation object' => sub {
 };
 
 subtest 'new() - accepts hashref argument style' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 
@@ -43,6 +49,9 @@ subtest 'new() - accepts hashref argument style' => sub {
 };
 
 subtest 'new() - accepts flat-list argument style' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 
@@ -54,6 +63,9 @@ subtest 'new() - accepts flat-list argument style' => sub {
 };
 
 subtest 'new() - unknown argument causes croak' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 
@@ -70,6 +82,9 @@ subtest 'new() - unknown argument causes croak' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'normalise() - missing occupation causes croak' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -83,6 +98,9 @@ subtest 'normalise() - missing occupation causes croak' => sub {
 };
 
 subtest 'normalise() - invalid sex value causes croak' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -100,6 +118,9 @@ subtest 'normalise() - invalid sex value causes croak' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'normalise() - return value is an arrayref of strings' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -116,6 +137,9 @@ subtest 'normalise() - return value is an arrayref of strings' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'normalise() - single string expanded via direct lookup table' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -128,6 +152,9 @@ subtest 'normalise() - single string expanded via direct lookup table' => sub {
 };
 
 subtest 'normalise() - arrayref input processes all elements' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -140,6 +167,9 @@ subtest 'normalise() - arrayref input processes all elements' => sub {
 };
 
 subtest 'normalise() - unrecognised occupation returned with ucfirst' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -157,6 +187,9 @@ subtest 'normalise() - unrecognised occupation returned with ucfirst' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'normalise() - Retired filtered out' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -167,6 +200,9 @@ subtest 'normalise() - Retired filtered out' => sub {
 };
 
 subtest 'normalise() - Unemployed filtered out' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -175,9 +211,12 @@ subtest 'normalise() - Unemployed filtered out' => sub {
 };
 
 subtest 'normalise() - Scholar and School patterns filtered out' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
-	my $obj = new_ok('Genealogy::Occupation');
+	my $obj = Genealogy::Occupation->new();
 
 	# Filter pattern: ^scho(?:ol|lar)
 	is_deeply($obj->normalise(occupation => 'Scholar'),   [], 'Scholar filtered');
@@ -186,6 +225,9 @@ subtest 'normalise() - Scholar and School patterns filtered out' => sub {
 };
 
 subtest 'normalise() - wife suffix pattern filtered out' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -196,6 +238,9 @@ subtest 'normalise() - wife suffix pattern filtered out' => sub {
 };
 
 subtest 'normalise() - domestic duties patterns filtered out' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -208,14 +253,20 @@ subtest 'normalise() - domestic duties patterns filtered out' => sub {
 };
 
 subtest 'normalise() - seeking work pattern filtered out' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
-	my $obj = new_ok('Genealogy::Occupation');
+	my $obj = Genealogy::Occupation->new();
 
 	is_deeply($obj->normalise(occupation => 'Seeking work'), [], 'Seeking work filtered');
 };
 
 subtest 'normalise() - entirely filtered input returns empty arrayref' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -231,6 +282,9 @@ subtest 'normalise() - entirely filtered input returns empty arrayref' => sub {
 # -----------------------------------------------------------------------
 
 subtest 'normalise() - consecutive identical entries deduplicated' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -243,6 +297,9 @@ subtest 'normalise() - consecutive identical entries deduplicated' => sub {
 };
 
 subtest 'normalise() - deduplication operates on normalised forms' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
@@ -257,6 +314,9 @@ subtest 'normalise() - deduplication operates on normalised forms' => sub {
 };
 
 subtest 'normalise() - non-consecutive duplicates are preserved' => sub {
+	delete local $ENV{LANGUAGE};
+	delete local $ENV{LC_ALL};
+	delete local $ENV{LC_MESSAGES};
 	local $ENV{LANG} = 'en_GB.UTF-8';
 	my $guard = mock_scoped('I18N::LangTags::Detect::detect' => sub { () });
 	my $obj = Genealogy::Occupation->new();
