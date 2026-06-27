@@ -153,7 +153,7 @@
 
 <tbody>
 
-<tr class="high"><td><a href="blib-lib-Genealogy-Occupation-pm.html" title="View coverage line by line" target="_blank">lib/Genealogy/Occupation.pm</a> <a href="https://github.com/nigelhorne/Genealogy-Occupation/blob/95667265b860ede0922e56de2d2144fd109e15d0/lib/Genealogy/Occupation.pm" class="icon-link" title="View source on GitHub">&#128269;</a><canvas class="sparkline" width="80" height="20" data-points="98.1,97.5,97.5,98.1,98.1,97.5"></canvas></td><td>100.0</td><td>100.0</td><td>85.4</td><td>100.0</td><td><span class="coverage-badge badge-good" title="Excellent coverage">98.1%</span></td><td class="negative" title="Previous (sparkline): 98.1%">&#9660; 0.6%</td></tr>
+<tr class="high"><td><a href="blib-lib-Genealogy-Occupation-pm.html" title="View coverage line by line" target="_blank">lib/Genealogy/Occupation.pm</a> <a href="https://github.com/nigelhorne/Genealogy-Occupation/blob/207fb227d43aa823f87260bf4d9feacae14004ff/lib/Genealogy/Occupation.pm" class="icon-link" title="View source on GitHub">&#128269;</a><canvas class="sparkline" width="80" height="20" data-points="98.1,97.5,97.5,98.1,98.1,97.5,98.1"></canvas></td><td>100.0</td><td>100.0</td><td>85.4</td><td>100.0</td><td><span class="coverage-badge badge-good" title="Excellent coverage">98.1%</span></td><td class="positive" title="Previous (sparkline): 97.5%">&#9650; 0.6%</td></tr>
 <tr class="summary-row nosort"><td colspan="2"><strong>Summary</strong></td><td colspan="2">1 files</td><td colspan="3">Avg: 98%, Low: 0</td></tr>
 <tr class="high nosort"><td><strong>Total</strong></td><td>100.0</td><td>100.0</td><td>85.4</td><td>100.0</td><td colspan="2"><strong>98.1</strong></td></tr>
 </tbody></table>
@@ -207,7 +207,8 @@ const dataPoints = [ { x: "2026-05-11T01:45:35+00:00", y: 97.4522292993631, delt
 { x: "2026-05-11T01:58:20+00:00", y: 97.4522292993631, delta: 0.0, url: "https://github.com/nigelhorne/Genealogy-Occupation/commit/669622ca5fb71b34dd06b7953dde9ac563d613fc", label: "2026-05-11T01:58:20+00:00", pointBackgroundColor: "gray", comment: "Update mutation results (2026-05-11 00c4825)" },
 { x: "2026-05-11T12:05:43+00:00", y: 98.1132075471698, delta: 0.7, url: "https://github.com/nigelhorne/Genealogy-Occupation/commit/6c0365e2d74204c54768f67cec22fe669211eab3", label: "2026-05-11T12:05:43+00:00", pointBackgroundColor: "green", comment: "Update mutation results (2026-05-11 f4ab696)" },
 { x: "2026-05-11T12:20:46+00:00", y: 98.1132075471698, delta: 0.0, url: "https://github.com/nigelhorne/Genealogy-Occupation/commit/26556a760fe324a758942e61446aded889faf27b", label: "2026-05-11T12:20:46+00:00", pointBackgroundColor: "gray", comment: "Update mutation results (2026-05-11 c627033)" },
-{ x: "2026-05-11T13:10:15+00:00", y: 98.1132075471698, delta: 0.0, url: "https://github.com/nigelhorne/Genealogy-Occupation/commit/67407c566f95d89194eeb4da6bd89aa888e32d58", label: "2026-05-11T13:10:15+00:00", pointBackgroundColor: "gray", comment: "Update mutation results (2026-05-11 da02f10)" } ];
+{ x: "2026-05-11T13:10:15+00:00", y: 98.1132075471698, delta: 0.0, url: "https://github.com/nigelhorne/Genealogy-Occupation/commit/67407c566f95d89194eeb4da6bd89aa888e32d58", label: "2026-05-11T13:10:15+00:00", pointBackgroundColor: "gray", comment: "Update mutation results (2026-05-11 da02f10)" },
+{ x: "2026-05-27T00:31:11+00:00", y: 98.1132075471698, delta: 0.0, url: "https://github.com/nigelhorne/Genealogy-Occupation/commit/c9459a8eb76208f1aa3f060cb91f2c2b0fd56da9", label: "2026-05-27T00:31:11+00:00", pointBackgroundColor: "gray", comment: "Update mutation results (2026-05-27 9566726)" } ];
 const regressionPoints = linearRegression(dataPoints);
 // Try to register the zoom plugin (handles different UMD builds)
 (function registerZoomPlugin(){
@@ -459,131 +460,15 @@ function refresh(){
 
 <p><center>Use mouse wheel or pinch to zoom; drag to pan</center></p>
 <p>No issues active on <a href="https://rt.cpan.org/Public/Dist/Display.html?Name=Genealogy-Occupation">RT</a></p>
-<h2>CPAN Testers Failures for Genealogy-Occupation 0.02</h2>
-<p class="notice perl-version-cliff">
-Fails on Perl &leq; 5.12.5; passes on Perl &geq; 5.16.0. 
-<a href="https://perldoc.perl.org/perl5160delta" target="_blank">See perldelta for this release</a>
- <span class="coverage-badge badge-good" title="3 fails, 0 passes">Strong confidence</span></p>
-<h3>Failure Summary (all reports)</h3>
-<ul>
-<li><b>Perl 5.12.x</b>: 3 failures</li>
-<li><b>linux</b>: 3 failures</li>
-<li><b>5.12 / linux</b>: 3 failures</li>
-</ul>
-<h3>Likely Root Causes</h3>
-<table class="root-causes">
-<thead>
-<tr>
-	<th>Cause</th>
-	<th>Confidence</th>
-	<th>Evidence</th>
-</tr>
-</thead>
-<tbody>
-
-<tr class="high">
-	<td halign="center"><strong>Perl version regression (Perl &lt; 5.16.0) (<a href="https://perldoc.perl.org/perl5160delta" target="_blank">perldelta</a>)</strong></td>
-	<td halign="center">Strong (100%)</td>
-	<td halign="center"><ul><li>All failures on Perl &leq; 5.12.5</li><li>All passes on Perl &geq; 5.16.0</li></ul></td>
-</tr>
-
-</tbody>
-</table>
-
-<script>
-document.addEventListener("DOMContentLoaded", function () {
-	const toggleFail = document.getElementById('toggleFail');
-	const toggleUnknown = document.getElementById('toggleUnknown');
-	const toggleNA = document.getElementById('toggleNA');
-	const toggleNew = document.getElementById('toggleNew');
-
-	function update() {
-		document.querySelectorAll('tr').forEach(row => {
-			// Skip header rows
-			if(row.querySelector('th')) return;
-
-			// Determine row status
-			const isFail = row.classList.contains('cpan-fail');
-			const isUnknown = row.classList.contains('cpan-unknown');
-			const isNA = row.classList.contains('cpan-na');
-			const isNew = !!row.querySelector('.new-failure');
-
-			// Decide whether to show the row
-			let show = true;
-
-			if(toggleFail && !toggleFail.checked && isFail) show = false;
-			if(toggleUnknown && !toggleUnknown.checked && isUnknown) show = false;
-			if(toggleNA && !toggleNA.checked && isNA) show = false;
-			if(toggleNew && toggleNew.checked && !isNew) show = false;
-
-			row.style.display = show ? '' : 'none';
-		});
-	}
-
-	[toggleFail, toggleUnknown, toggleNA, toggleNew].forEach(cb => {
-		if(cb) cb.addEventListener('change', update);
-	});
-
-	update();
-});
-document.addEventListener("DOMContentLoaded", () => {
-	const th = document.querySelector("table.sortable-table th");
-	if(th) sortTable(th, 0);
-});
-</script>
-
-<p><em>Showing one failure per OS/Perl combination.</em></p>
-<div style="margin-bottom: 0.5em;">
-	<label>
-		<input type="checkbox" id="toggleFail" checked>
-		FAIL
-	</label>
-	<label style="margin-left: 1em;">
-		<input type="checkbox" id="toggleUnknown">
-		UNKNOWN
-	</label>
-	<label style="margin-left: 1em;">
-		<input type="checkbox" id="toggleNA">
-		NA
-	</label>
-	<label style="margin-left: 1em;">
-		<input type="checkbox" id="toggleNew">
-		NEW only
-	</label>
-</div>
-
-<table class="sortable-table" data-sort-col="0" data-sort-order="asc">
-<thead>
-<tr>
-	<th class="sortable" onclick="sortTable(this, 0)">
-		<span class="label">Date</span> <span class="arrow">&#x25B2;</span>
-	</th>
-	<th class="sortable" onclick="sortTable(this, 1)">
-		<span class="label">OS</span> <span class="arrow">&#x25B2;</span>
-	</th>
-	<th class="sortable" onclick="sortTable(this, 2)">
-		<span class="label">Perl</span> <span class="arrow">&#x25B2;</span>
-	</th>
-	<th class="sortable" onclick="sortTable(this, 3)">
-		<span class="label">Reporter</span> <span class="arrow">&#x25B2;</span>
-	</th>
-	<th class="sortable" onclick="sortTable(this, 4)" title="Marks failures that did not occur in the previous release. The same OS, Perl version, architecture, and platform were passing before.">
-		<span class="label">New</span> <span class="arrow">&#x25B2;</span>
-	</th>
-	<th>Report</th>
-</tr>
-</thead>
-<tbody>
-
-<p><em>5 report(s) on Perl &leq; 5.12.5 omitted — expected failures, see version cliff notice above.</em></p>
-</tbody></table>
+<p><a href="https://api.cpantesters.org/v3/summary/Genealogy-Occupation">https://api.cpantesters.org/v3/summary/Genealogy-Occupation</a>: 599 Internal Exception</p>
+<p><em>CPAN Testers data unavailable: CPAN Testers API temporarily unreachable. Check <a href="https://api.cpantesters.org/v3/summary/Genealogy-Occupation">https://api.cpantesters.org/v3/summary/Genealogy-Occupation</a> manually.</em></p>
 <h2>Mutation Report</h2>
 <h3>Mutation Summary</h3>
 <ul>
 <li><b>Score</b>: 100.00%</li>
-<li><b>Total</b>: 94</li>
+<li><b>Total</b>: 108</li>
 <li><b>Killed</b>: 
-94
+108
 </li>
 <li><b>Survived</b>: 
 0
@@ -595,7 +480,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 <tr><th>File</th><th>Total</th><th>Killed</th><th>Survivors</th><th>Skipped</th><th>Score%</th><th>Complexity</th><th title="TER1=Statement, TER2=Branch, TER3=LCSAJ Path">TER1 / TER2 / TER3</th></tr>
 
-<tr class="high"><td><a href="mutation_html/lib/Genealogy/Occupation.pm.html" title="View mutation line by line" target="_blank">lib/Genealogy/Occupation.pm</a> <a href="https://github.com/nigelhorne/Genealogy-Occupation/blob/95667265b860ede0922e56de2d2144fd109e15d0/lib/Genealogy/Occupation.pm" class="icon-link" title="View source on GitHub">&#128269;</a></td><td>94</td><td>94</td><td>0</td><td>0</td><td><span class="coverage-badge badge-good" title="Excellent">100.0%</span></td><td><span class="coverage-badge badge-good" title="Good">62</span></td><td><span class="coverage-badge badge-good" title="Excellent">100.0%</span> / <span class="coverage-badge badge-good" title="Excellent">100.0%</span> / <span class="coverage-badge badge-good" title="Excellent">100.0%</span></td></tr>
+<tr class="high"><td><a href="mutation_html/lib/Genealogy/Occupation.pm.html" title="View mutation line by line" target="_blank">lib/Genealogy/Occupation.pm</a> <a href="https://github.com/nigelhorne/Genealogy-Occupation/blob/207fb227d43aa823f87260bf4d9feacae14004ff/lib/Genealogy/Occupation.pm" class="icon-link" title="View source on GitHub">&#128269;</a></td><td>108</td><td>108</td><td>0</td><td>0</td><td><span class="coverage-badge badge-good" title="Excellent">100.0%</span></td><td><span class="coverage-badge badge-good" title="Good">62</span></td><td><span class="coverage-badge badge-good" title="Excellent">100.0%</span> / <span class="coverage-badge badge-good" title="Excellent">100.0%</span> / <span class="coverage-badge badge-good" title="Excellent">100.0%</span></td></tr>
 </table>
 
 <h2>Structural Coverage (Approximate)</h2>
@@ -610,8 +495,8 @@ Tests execute 100.00% of the code and detect 100.00% of injected faults.
 </div>
 <footer>
 	<p>Project: <a href="https://github.com/nigelhorne/Genealogy-Occupation">Genealogy-Occupation</a></p>
-	<p><em>Last updated: 2026-05-27 00:26:09 - <a href="https://github.com/nigelhorne/Genealogy-Occupation/commit/95667265b860ede0922e56de2d2144fd109e15d0">commit <code>9566726</code></a></em></p>
-	<p style="float: right; font-size: 0.85em; color: #999;">Powered by <a href="https://metacpan.org/dist/App-Test-Generator">App::Test::Generator 0.39</a></p>
+	<p><em>Last updated: 2026-06-27 00:29:10 - <a href="https://github.com/nigelhorne/Genealogy-Occupation/commit/207fb227d43aa823f87260bf4d9feacae14004ff">commit <code>207fb22</code></a></em></p>
+	<p style="float: right; font-size: 0.85em; color: #999;">Powered by <a href="https://metacpan.org/dist/App-Test-Generator">App::Test::Generator 0.40</a></p>
 </footer>
 </body>
 </html>

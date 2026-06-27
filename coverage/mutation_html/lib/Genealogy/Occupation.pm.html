@@ -246,7 +246,7 @@ pre details.mutant-details ul {
 <strong>Structural Coverage (Approximate)</strong><p>
 TER1 (Statement): 100.00%<br>
 TER2 (Branch): 100.00%<br>
-TER3 (LCSAJ): 100.0% (62/62)<br>
+TER3 (LCSAJ): 100.0% (28/28)<br>
 Approximate LCSAJ segments: 97<br>
 </div>
 
@@ -528,8 +528,8 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  236: 	# Detect and cache the system language at construction time
 </span><span class="">  237: 	my $language = _get_language();
 </span><span class="">  238: 
-</span><span class="">  239: 	return bless {
-</span><span class="">  240: 		warn_on_error =&gt; $args-&gt;{warn_on_error} // 0,
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  239: 	return bless {
+</span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  240: 		warn_on_error =&gt; $args-&gt;{warn_on_error} // 0,
 </span><span class="">  241: 		language      =&gt; $language,
 </span><span class="">  242: 	}, $class;
 </span><span class="">  243: }
@@ -616,7 +616,7 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  324: =cut
 </span><span class="">  325: 
 </span><span class="">  326: sub normalise {
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">327 → 360 → 406</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">327 → 360 → 0</span></span>  327: 	my $self = shift;
+</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">327 → 360 → 406</span></span>  327: 	my $self = shift;
 </span><span class="">  328: 
 </span><span class="">  329: 	# Accept both hashref and flat list
 </span><span class="">  330: 	my $args = Params::Get::get_params(undef, @_);
@@ -695,8 +695,8 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  403: 		push @result, ucfirst($occupation);
 </span><span class="">  404: 	}
 </span><span class="">  405: 
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">406 → 406 → 0</span></span>  406: 	return set_return(\@result, { type =&gt; &#39;arrayref&#39;, element_type =&gt; &#39;string&#39; });
-</span><span class="">  407: }
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  406: 	return set_return(\@result, { type =&gt; &#39;arrayref&#39;, element_type =&gt; &#39;string&#39; });
+</span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  407: }
 </span><span class="">  408: 
 </span><span class="">  409: # _normalise_single
 </span><span class="">  410: #
@@ -721,7 +721,7 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  429: #   genealogy records that we intentionally handle.
 </span><span class="">  430: 
 </span><span class="">  431: sub _normalise_single {
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">432 → 435 → 440</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">432 → 435 → 0</span></span>  432: 	my $occupation = shift;
+</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">432 → 435 → 440</span></span>  432: 	my $occupation = shift;
 </span><span class="">  433: 
 </span><span class="">  434: 	# Check direct lookup table first for exact matches
 </span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  435: 	if(my $match = $DIRECT{lc($occupation)}) {
@@ -729,12 +729,12 @@ Approximate LCSAJ segments: 97<br>
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  437: 	}
 </span><span class="">  438: 
 </span><span class="">  439: 	# Handle &quot;general servant domestic&quot; pattern variants
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">440 → 440 → 445</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">440 → 440 → 0</span></span>  440: 	if($occupation =~ $GENERAL_SERVANT_RE) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">440 → 440 → 445</span></span>  440: 	if($occupation =~ $GENERAL_SERVANT_RE) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  441: 		return &#39;Domestic Servant&#39;;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  442: 	}
 </span><span class="">  443: 
 </span><span class="">  444: 	# Remove common suffixes that add no occupational meaning
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">445 → 453 → 458</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">445 → 453 → 0</span></span>  445: 	$occupation =~ s/\s+own account$//i;
+</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">445 → 453 → 458</span></span>  445: 	$occupation =~ s/\s+own account$//i;
 </span><span class="">  446: 	$occupation =~ s/^formerly //i;
 </span><span class="">  447: 	$occupation =~ s/\s+retired$//i;
 </span><span class="">  448: 	$occupation =~ s/\s+heavy worker$//i;
@@ -747,40 +747,40 @@ Approximate LCSAJ segments: 97<br>
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  455: 	}
 </span><span class="">  456: 
 </span><span class="">  457: 	# Convert &quot;works on/for X&quot; to &quot;X worker&quot;
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">458 → 458 → 463</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">458 → 458 → 0</span></span>  458: 	if($occupation =~ /works?\s+(?:on|for)\s+(.+)/i) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">458 → 458 → 463</span></span>  458: 	if($occupation =~ /works?\s+(?:on|for)\s+(.+)/i) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  459: 		return &quot;$1 worker&quot;;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  460: 	}
 </span><span class="">  461: 
 </span><span class="">  462: 	# Convert &quot;Cleaner X&quot; prefix form to &quot;X cleaner&quot;
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">463 → 463 → 468</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">463 → 463 → 0</span></span>  463: 	if($occupation =~ /^Cleaner\s+(.+)/i) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">463 → 463 → 468</span></span>  463: 	if($occupation =~ /^Cleaner\s+(.+)/i) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  464: 		return &quot;$1 cleaner&quot;;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  465: 	}
 </span><span class="">  466: 
 </span><span class="">  467: 	# Reorder clerk, salesman, foreman, manager patterns
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">468 → 468 → 471</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">468 → 468 → 0</span></span>  468: 	if($occupation =~ /^Clerk\s+(.+)/i) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">468 → 468 → 471</span></span>  468: 	if($occupation =~ /^Clerk\s+(.+)/i) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  469: 		return &quot;$1 Clerk&quot;;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  470: 	}
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">471 → 471 → 474</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">471 → 471 → 0</span></span>  471: 	if($occupation =~ /^Salesman\s+(.*)/i) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">471 → 471 → 474</span></span>  471: 	if($occupation =~ /^Salesman\s+(.*)/i) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  472: 		return &quot;$1 Salesman&quot;;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  473: 	}
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">474 → 474 → 479</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">474 → 474 → 0</span></span>  474: 	if($occupation =~ /^Foreman\s+(.*)/i) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">474 → 474 → 479</span></span>  474: 	if($occupation =~ /^Foreman\s+(.*)/i) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="">  475: 		my $of = $1;
 </span><span class="">  476: 		$of =~ s/^of the //i;
 </span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  477: 		return &quot;$of Foreman&quot;;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  478: 	}
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">479 → 479 → 486</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">479 → 479 → 0</span></span>  479: 	if($occupation =~ /^Manager\s+(.*)/i
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">479 → 479 → 486</span></span>  479: 	if($occupation =~ /^Manager\s+(.*)/i
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="">  480: 		&amp;&amp; $occupation !~ /^Manager of /i
 </span><span class="">  481: 		&amp;&amp; $occupation !~ /Manager &amp; /i) {
 </span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  482: 		return &quot;$1 Manager&quot;;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  483: 	}
 </span><span class="">  484: 
 </span><span class="">  485: 	# Convert &quot;Shop Assistant X&quot; to &quot;X&#39;s Shop Assistant&quot;
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">486 → 486 → 491</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">486 → 486 → 0</span></span>  486: 	if($occupation =~ /^Shop Assistant\s+(.+)/i) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">486 → 486 → 491</span></span>  486: 	if($occupation =~ /^Shop Assistant\s+(.+)/i) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  487: 		return &quot;$1&#39;s Shop Assistant&quot;;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  488: 	}
 </span><span class="">  489: 
 </span><span class="">  490: 	# Convert &quot;X Assistant&quot; to &quot;X&#39;s Assistant&quot; for known trade forms
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">491 → 491 → 505</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">491 → 491 → 0</span></span>  491: 	if($occupation =~ /^(.+)\s+Assistant$/i) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">491 → 491 → 505</span></span>  491: 	if($occupation =~ /^(.+)\s+Assistant$/i) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="">  492: 		my $trade = $1;
 </span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  493: 		if(lc($trade) eq &#39;bakers&#39;) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  494: 			return &quot;Baker&#39;s Assistant&quot;;
@@ -794,7 +794,7 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  502: 	}
 </span><span class="">  503: 
 </span><span class="">  504: 	# Convert police* to &quot;police officer&quot;
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">505 → 505 → 522</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">505 → 505 → 0</span></span>  505: 	if($occupation =~ /police$/i) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">505 → 505 → 522</span></span>  505: 	if($occupation =~ /police$/i) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  506: 		return &quot;$occupation officer&quot;;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  507: 	}
 </span><span class="">  508: 
@@ -811,7 +811,7 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  519: 	# &quot;Harness Maker&quot; ($base eq &#39;Harnes&#39;) must not be rewritten.
 </span><span class="">  520: 	# Compare against $base directly - using &quot;$base$last&quot; is wrong
 </span><span class="">  521: 	# because it appends the final character a second time.
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">522 → 522 → 531</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">522 → 522 → 0</span></span>  522: 	if($occupation !~ /gas works/i
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">522 → 522 → 531</span></span>  522: 	if($occupation !~ /gas works/i
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="">  523: 		&amp;&amp; $occupation =~ /^(.+([a-z]))s\s+([a-z]+)$/i) {
 </span><span class="">  524: 		my ($base, $last, $role) = ($1, $2, $3);
 </span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  525: 		unless(lc($base) eq &#39;bu&#39; || lc($base) eq &#39;harnes&#39;) {
@@ -820,11 +820,11 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  528: 	}
 </span><span class="">  529: 
 </span><span class="">  530: 	# Handle &quot;on farm&quot; pattern
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">531 → 531 → 535</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">531 → 531 → 0</span></span>  531: 	if($occupation =~ /^(.+)\s+on farm$/i) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">531 → 531 → 535</span></span>  531: 	if($occupation =~ /^(.+)\s+on farm$/i) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  532: 		return &quot;$1 on a farm&quot;;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  533: 	}
 </span><span class="">  534: 
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">535 → 535 → 0</span></span>  535: 	return $occupation;
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  535: 	return $occupation;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  536: }
 </span><span class="">  537: 
 </span><span class="">  538: # _apply_locale
@@ -851,7 +851,7 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  559: #   cannot be fully recovered by ucfirst() alone.
 </span><span class="">  560: 
 </span><span class="">  561: sub _apply_locale {
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">562 → 565 → 572</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">562 → 565 → 0</span></span>  562: 	my $occupation = shift;
+</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">562 → 565 → 572</span></span>  562: 	my $occupation = shift;
 </span><span class="">  563: 
 </span><span class="">  564: 	# Apply American English spelling variants
 </span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  565: 	if(defined($ENV{&#39;LANG&#39;}) &amp;&amp; ($ENV{&#39;LANG&#39;} =~ /^en_US/)) {
@@ -861,13 +861,13 @@ Approximate LCSAJ segments: 97<br>
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  569: 	}
 </span><span class="">  570: 
 </span><span class="">  571: 	# Apply Canadian English spelling variants
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">572 → 572 → 577</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">572 → 572 → 0</span></span>  572: 	if(defined($ENV{&#39;LANG&#39;}) &amp;&amp; ($ENV{&#39;LANG&#39;} =~ /^en_CA/)) {
-</span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="">  573: 		return Lingua::EN::ABC::b2c($occupation);
-</span><span class="">  574: 	}
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">572 → 572 → 577</span></span>  572: 	if(defined($ENV{&#39;LANG&#39;}) &amp;&amp; ($ENV{&#39;LANG&#39;} =~ /^en_CA/)) {
+</span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  573: 		return Lingua::EN::ABC::b2c($occupation);
+</span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  574: 	}
 </span><span class="">  575: 
 </span><span class="">  576: 	# Default to British English spelling
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">577 → 577 → 0</span></span>  577: 	return Lingua::EN::ABC::a2b($occupation);
-</span><span class="">  578: }
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  577: 	return Lingua::EN::ABC::a2b($occupation);
+</span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  578: }
 </span><span class="">  579: 
 </span><span class="">  580: # _translate_french
 </span><span class="">  581: #
@@ -894,7 +894,7 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  602: #   replace the occupation string.
 </span><span class="">  603: 
 </span><span class="">  604: sub _translate_french {
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">605 → 608 → 613</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">605 → 608 → 0</span></span>  605: 	my ($occupation, $sex, $warn_on_error) = @_;
+</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">605 → 608 → 613</span></span>  605: 	my ($occupation, $sex, $warn_on_error) = @_;
 </span><span class="">  606: 
 </span><span class="">  607: 	# Handle teaching as a special regex case
 </span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  608: 	if($occupation =~ /teaching/i) {
@@ -902,7 +902,7 @@ Approximate LCSAJ segments: 97<br>
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  610: 	}
 </span><span class="">  611: 
 </span><span class="">  612: 	# Handle retired as a suffix replacement
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">613 → 616 → 624</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">613 → 616 → 0</span></span>  613: 	$occupation =~ s/retired/\x{00E0} la retraite/i;
+</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">613 → 616 → 624</span></span>  613: 	$occupation =~ s/retired/\x{00E0} la retraite/i;
 </span><span class="">  614: 
 </span><span class="">  615: 	# Handle X Farmer pattern
 </span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  616: 	if($occupation =~ /^(.+)\sFarmer$/i) {
@@ -913,7 +913,7 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  621: 	}
 </span><span class="">  622: 
 </span><span class="">  623: 	# Check the French translation lookup table
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">624 → 624 → 632</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">624 → 624 → 0</span></span>  624: 	if(my $translation = $FRENCH{lc($occupation)}) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">624 → 624 → 632</span></span>  624: 	if(my $translation = $FRENCH{lc($occupation)}) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  625: 		if(ref($translation) eq &#39;HASH&#39;) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  626: 			return $translation-&gt;{$sex} // $translation-&gt;{&#39;M&#39;};
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  627: 		}
@@ -921,11 +921,11 @@ Approximate LCSAJ segments: 97<br>
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  629: 	}
 </span><span class="">  630: 
 </span><span class="">  631: 	# Fall back to English with optional warning
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">632 → 632 → 636</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">632 → 632 → 0</span></span>  632: 	if($warn_on_error) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">632 → 632 → 636</span></span>  632: 	if($warn_on_error) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="">  633: 		Carp::carp &quot;Genealogy::Occupation: no French translation for &#39;$occupation&#39;&quot;;
 </span><span class="">  634: 	}
 </span><span class="">  635: 
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">636 → 636 → 0</span></span>  636: 	return $occupation;
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  636: 	return $occupation;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  637: }
 </span><span class="">  638: 
 </span><span class="">  639: # _translate_german
@@ -952,7 +952,7 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  660: #   regex rather than the lookup table.
 </span><span class="">  661: 
 </span><span class="">  662: sub _translate_german {
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">663 → 666 → 671</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">663 → 666 → 0</span></span>  663: 	my ($occupation, $sex, $warn_on_error) = @_;
+</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">663 → 666 → 671</span></span>  663: 	my ($occupation, $sex, $warn_on_error) = @_;
 </span><span class="">  664: 
 </span><span class="">  665: 	# Handle teaching as a special regex case
 </span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  666: 	if($occupation =~ /teaching/i) {
@@ -960,12 +960,12 @@ Approximate LCSAJ segments: 97<br>
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  668: 	}
 </span><span class="">  669: 
 </span><span class="">  670: 	# Handle X Farmer pattern
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">671 → 671 → 676</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">671 → 671 → 0</span></span>  671: 	if($occupation =~ /^(.+)\sFarmer$/i) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">671 → 671 → 676</span></span>  671: 	if($occupation =~ /^(.+)\sFarmer$/i) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  672: 		return $sex eq &#39;F&#39; ? &#39;Landwirtin&#39; : &#39;Landwirt&#39;;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  673: 	}
 </span><span class="">  674: 
 </span><span class="">  675: 	# Handle retired and self-employed as suffix replacements
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">676 → 680 → 688</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">676 → 680 → 0</span></span>  676: 	$occupation =~ s/retired/im ruhestand/i;
+</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">676 → 680 → 688</span></span>  676: 	$occupation =~ s/retired/im ruhestand/i;
 </span><span class="">  677: 	$occupation =~ s/self-employed/selbstst\x{00E4}ndig/i;
 </span><span class="">  678: 
 </span><span class="">  679: 	# Check the German translation lookup table
@@ -977,11 +977,11 @@ Approximate LCSAJ segments: 97<br>
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  685: 	}
 </span><span class="">  686: 
 </span><span class="">  687: 	# Fall back to English with optional warning
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">688 → 688 → 692</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">688 → 688 → 0</span></span>  688: 	if($warn_on_error) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">688 → 688 → 692</span></span>  688: 	if($warn_on_error) {
 </span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="">  689: 		Carp::carp &quot;Genealogy::Occupation: no German translation for &#39;$occupation&#39;&quot;;
 </span><span class="">  690: 	}
 </span><span class="">  691: 
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">692 → 692 → 0</span></span>  692: 	return $occupation;
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  692: 	return $occupation;
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  693: }
 </span><span class="">  694: 
 </span><span class="">  695: # _get_language
@@ -1007,26 +1007,26 @@ Approximate LCSAJ segments: 97<br>
 </span><span class="">  715: 
 </span><span class="">  716: sub _get_language {
 </span><span class="">  717: 	# Try I18N::LangTags::Detect first for most accurate detection
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">718 → 718 → 725</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">718 → 718 → 0</span></span>  718: 	for my $tag (I18N::LangTags::Detect::detect()) {
+</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">718 → 718 → 725</span></span>  718: 	for my $tag (I18N::LangTags::Detect::detect()) {
 </span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  719: 		if($tag =~ /^([a-z]{2})/i) {
-</span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="">  720: 			return lc($1);
-</span><span class="">  721: 		}
+</span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  720: 			return lc($1);
+</span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  721: 		}
 </span><span class="">  722: 	}
 </span><span class="">  723: 
 </span><span class="">  724: 	# Fall back to checking environment variables in order
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">725 → 725 → 728</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">725 → 725 → 0</span></span>  725: 	if(($ENV{&#39;LANGUAGE&#39;}) &amp;&amp; ($ENV{&#39;LANGUAGE&#39;} =~ /^([a-z]{2})/i)) {
-</span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="">  726: 		return lc($1);
-</span><span class="">  727: 	}
-</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">728 → 728 → 737</span></span><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">728 → 728 → 0</span></span>  728: 	foreach my $variable (&#39;LC_ALL&#39;, &#39;LC_MESSAGES&#39;, &#39;LANG&#39;) {
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">725 → 725 → 728</span></span>  725: 	if(($ENV{&#39;LANGUAGE&#39;}) &amp;&amp; ($ENV{&#39;LANGUAGE&#39;} =~ /^([a-z]{2})/i)) {
+</span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  726: 		return lc($1);
+</span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  727: 	}
+</span><span class=""><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">728 → 728 → 737</span></span>  728: 	foreach my $variable (&#39;LC_ALL&#39;, &#39;LC_MESSAGES&#39;, &#39;LANG&#39;) {
 </span><span class="">  729: 		my $val = $ENV{$variable};
 </span><span class="">  730: 		next unless defined($val);
 </span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  731: 		if($val =~ /^([a-z]{2})/i) {
-</span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="">  732: 			return lc($1);
-</span><span class="">  733: 		}
+</span><p> <b> Mutants (Total: 1, Killed: 1, Survived: 0)</b><p><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  732: 			return lc($1);
+</span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  733: 		}
 </span><span class="">  734: 	}
 </span><span class="">  735: 
 </span><span class="">  736: 	# Handle C locale explicitly
-</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic."><span class="lcsaj-tip"><span class="lcsaj-dot">●</span><span class="lcsaj-tip-text">737 → 739 → 0</span></span>  737: 	return &#39;en&#39; if(defined($ENV{&#39;LANG&#39;}) &amp;&amp; $ENV{&#39;LANG&#39;} =~ /^C(\.|$)/);
+</span><span class="killed tooltip" data-tooltip="Mutations here were killed. Tests are effectively covering this logic.">  737: 	return &#39;en&#39; if(defined($ENV{&#39;LANG&#39;}) &amp;&amp; $ENV{&#39;LANG&#39;} =~ /^C(\.|$)/);
 </span><p> <b> Mutants (Total: 2, Killed: 2, Survived: 0)</b><p><span class="">  738: 
 </span><span class="">  739: 	return;
 </span><span class="">  740: }
